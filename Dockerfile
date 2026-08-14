@@ -13,6 +13,7 @@ RUN apt-get update \
         nano file less \
         ripgrep procps yq nginx \
     && rm -rf /var/lib/apt/lists/* \
+    && rm -f /etc/nginx/nginx.conf \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -f /usr/lib/python3*/EXTERNALLY-MANAGED
 
