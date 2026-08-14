@@ -4,14 +4,13 @@ WORKDIR /workspace
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        git ca-certificates openssl-client tmux \
+        git ca-certificates openssl tmux \
         python3 python3-pip python3-venv \
-        curl jq wget \
+        curl jq wget htop \
         build-essential \
         ffmpeg sqlite3 \
         unzip zip tree \
         nano file less \
-        bubblewrap htop \
         ripgrep procps yq \
     && rm -rf /var/lib/apt/lists/* \
     && ln -sf /usr/bin/python3 /usr/bin/python \
