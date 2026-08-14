@@ -3,7 +3,6 @@ set -e
 
 mkdir -p "$DSH_HOME"
 
-# 确保工作区目录存在
 mkdir -p /workspace
 
 dsh web &
