@@ -5,15 +5,18 @@ services:
     restart: unless-stopped
     init: true
     ports:
-      - "3080:3080"
+      - "3081:3081"
     volumes:
       - ~/.dsh:/app/.dsh
       - ~/workspace:/workspace
     environment:
-    # 配置监听地址与端口(监听地址请设置为容器IP)
+    # 配置监听地址与端口
       - DSH_WEB_HOST=0.0.0.0
-      - DSH_WEB_PORT=3080
-    # 可选:配置目录(默认 /app/.dsh,如不需要改可不设)
+      - DSH_WEB_PORT=3081
+    # 启用 Basic Auth ,账号密码同时设置才启用(缺一不可)
+    # - DSH_AUTH_USER=admin
+    # - DSH_AUTH_PASS=your_password
+    # 修改配置目录(默认 /app/.dsh,如不需要改可不设)
     # - DSH_HOME=/app/.dsh
     security_opt:
       - no-new-privileges:true
