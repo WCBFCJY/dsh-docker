@@ -30,4 +30,3 @@ ENV NODE_ENV=production \
 EXPOSE 3080
 
 ENTRYPOINT ["dsh-entrypoint"]
-CMD ["dsh", "web", "--host", "0.0.0.0", "--port", "3080"]
