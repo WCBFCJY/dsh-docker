@@ -6,12 +6,13 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git ca-certificates openssl tmux \
         python3 python3-pip python3-venv \
-        curl jq wget htop \
+        curl jq wget nginx \
         build-essential \
         ffmpeg sqlite3 \
         unzip zip tree \
         nano file less \
-        ripgrep procps yq nginx \
+        bubblewrap htop \
+        ripgrep procps yq \
     && rm -rf /var/lib/apt/lists/* \
     && rm -f /etc/nginx/nginx.conf \
     && ln -sf /usr/bin/python3 /usr/bin/python \
