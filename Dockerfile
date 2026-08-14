@@ -1,0 +1,34 @@
+FROM node:24-trixie-slim
+
+WORKDIR /workspace
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git ca-certificates openssl-client tmux \
+        python3 python3-pip python3-venv \
+        curl jq wget \
+        build-essential \
+        ffmpeg sqlite3 \
+        unzip zip tree \
+        nano file less \
+        bubblewrap htop \
+        ripgrep procps yq \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -sf /usr/bin/python3 /usr/bin/python \
+    && rm -f /usr/lib/python3*/EXTERNALLY-MANAGED
+
+RUN npm install -g @deepseek-ai/dsh \
+    && npm cache clean --force
+
+RUN mkdir -p /app/.dsh /workspace
+
+COPY docker-entrypoint.sh /usr/local/bin/dsh-entrypoint
+RUN chmod +x /usr/local/bin/dsh-entrypoint
+
+ENV NODE_ENV=production \
+    DSH_HOME=/app/.dsh
+
+EXPOSE 3080
+
+ENTRYPOINT ["dsh-entrypoint"]
+CMD ["dsh", "web", "--host", "0.0.0.0", "--port", "3080"]

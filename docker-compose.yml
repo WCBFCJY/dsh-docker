@@ -1,0 +1,16 @@
+services:
+  dsh:
+    image: dsh:latest
+    container_name: dsh
+    restart: unless-stopped
+    init: true
+    ports:
+      - "3080:3080"
+    volumes:
+      - ~/.dsh:/app/.dsh
+      - ~/workspace:/workspace
+  # environment:
+      # 可选:配置目录(默认 /app/.dsh,如不需要改可不设)
+      # - DSH_HOME=/app/.dsh
+    security_opt:
+      - no-new-privileges:true
