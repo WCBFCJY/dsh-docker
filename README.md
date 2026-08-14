@@ -54,7 +54,7 @@ services:
 
 ## 自定义 nginx 配置
 
-挂载自定义配置后,容器检测到 `/etc/nginx/nginx.conf` 已存在,不再生成默认配置,完全使用你的:
+挂载自定义配置后,容器检测到 `/etc/nginx/nginx.conf` 已存在,则不会生成默认配置,完全使用你的自定义配置:
 
 ```yaml
 volumes:
@@ -65,7 +65,7 @@ volumes:
 
 ## 数据持久化
 
-- `/app/.dsh` — DSH 配置、profiles、会话状态(建议挂载卷)
+- `/app/.dsh` — DSH 配置、profiles、会话状态
 - `/workspace` — 工作区,Agent 可操作的项目目录
 - 镜像 dsh 通过 `npm install -g @deepseek-ai/dsh` 安装,为构建时的 npm `latest` 版本;
 
