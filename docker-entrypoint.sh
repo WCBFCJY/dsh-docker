@@ -1,10 +1,12 @@
 #!/bin/sh
 set -e
 
-# 确保配置目录存在(挂载的卷可能是空目录)
 mkdir -p "$DSH_HOME"
 
-# 确保工作区目录存在
 mkdir -p /workspace
+
+if [ $# -eq 0 ]; then
+    exec dsh web --host "${DSH_WEB_HOST:-0.0.0.0}" --port "${DSH_WEB_PORT:-3080}"
+fi
 
 exec "$@"
