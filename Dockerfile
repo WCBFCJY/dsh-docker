@@ -11,7 +11,7 @@ RUN apt-get update \
         ffmpeg sqlite3 \
         unzip zip tree \
         nano file less \
-        ripgrep procps yq socat \
+        ripgrep procps yq nginx \
     && rm -rf /var/lib/apt/lists/* \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -f /usr/lib/python3*/EXTERNALLY-MANAGED
@@ -29,6 +29,6 @@ ENV NODE_ENV=production \
     DSH_WEB_HOST=0.0.0.0 \
     DSH_WEB_PORT=3081
 
-EXPOSE 3080
+EXPOSE 3081
 
 ENTRYPOINT ["dsh-entrypoint"]
