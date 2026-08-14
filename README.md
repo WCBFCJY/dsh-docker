@@ -1,6 +1,6 @@
 # DSH Docker
 
-基于 Node 24 的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)(DSH)容器镜像,内置 nginx 反向代理,解决 Web UI 的浏览器信任校验问题。
+基于 Node 24 的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH)容器镜像,内置 nginx 反向代理,解决 Web UI 的浏览器信任校验问题。
 
 ## 工作原理
 
@@ -67,5 +67,8 @@ volumes:
 
 - `/app/.dsh` — DSH 配置、profiles、会话状态(建议挂载卷)
 - `/workspace` — 工作区,Agent 可操作的项目目录
-- dsh 通过 `npm install -g @deepseek-ai/dsh` 安装,取 npm `latest` 版本,需要锁定版本可在包名后加 `@版本号`;
-- 同一行 `RUN` 指令不变时 Docker 会复用构建缓存,要强制安装最新版 dsh 请用 `docker build --no-cache`。
+- 镜像 dsh 通过 `npm install -g @deepseek-ai/dsh` 安装,为构建时的 npm `latest` 版本;
+
+## License
+
+[MIT](LICENSE)
