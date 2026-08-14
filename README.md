@@ -4,7 +4,7 @@
 
 ## 工作原理
 
-- dsh 主程序强制监听 `127.0.0.1:3080`,作为后台进程运行;
+- dsh 主程序默认监听 `127.0.0.1:3080`,作为后台进程运行;
 - nginx 监听 `DSH_WEB_HOST:DSH_WEB_PORT`(默认 `0.0.0.0:3081`),把流量转发到 `127.0.0.1:3080`;
 - 转发时改写 `Host: 127.0.0.1:3081`、删除 `Origin`、透传 WebSocket(`Upgrade`/`Connection`);
 - DSH 的浏览器信任栅栏校验 HTTP `Host` 头(特权接口强制 loopback,`--trusted-host` 不生效),改写后外部访问也能通过校验。
