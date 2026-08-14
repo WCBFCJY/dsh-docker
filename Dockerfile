@@ -26,7 +26,7 @@ RUN chmod +x /usr/local/bin/dsh-entrypoint
 
 ENV NODE_ENV=production \
     DSH_HOME=/app/.dsh \
-    DSH_WEB_HOST=0.0.0.0 \
+    DSH_WEB_HOST=127.0.0.1 \
     DSH_WEB_PORT=3080
 
 EXPOSE 3080
