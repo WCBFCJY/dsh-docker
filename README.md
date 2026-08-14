@@ -1,6 +1,6 @@
 # DSH Docker
 
-基于 Node 24 的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) 容器镜像，支持远程访问，内置 nginx 反向代理,解决 Web UI 的浏览器信任校验问题。
+基于 Node 24 的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH) 容器镜像，支持远程访问，内置 nginx 反向代理，解决 Web UI 的浏览器信任校验问题。
 
 ## 工作原理
 
