@@ -9,11 +9,11 @@ services:
     volumes:
       - ~/.dsh:/app/.dsh
       - ~/workspace:/workspace
-  # environment:
-      # 可选:配置目录(默认 /app/.dsh,如不需要改可不设)
-      # - DSH_HOME=/app/.dsh
-      # 可选:监听地址与端口(默认 0.0.0.0:3080)
-      # - DSH_WEB_HOST=0.0.0.0
-      # - DSH_WEB_PORT=3080
+    environment:
+    # 配置监听地址与端口(监听地址请设置为容器IP)
+      - DSH_WEB_HOST=0.0.0.0
+      - DSH_WEB_PORT=3080
+    # 可选:配置目录(默认 /app/.dsh,如不需要改可不设)
+    # - DSH_HOME=/app/.dsh
     security_opt:
       - no-new-privileges:true
