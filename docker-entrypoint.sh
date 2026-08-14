@@ -3,10 +3,10 @@ set -e
 
 mkdir -p "$DSH_HOME"
 
+# 确保工作区目录存在
 mkdir -p /workspace
 
-if [ $# -eq 0 ]; then
-    exec dsh web --host "${DSH_WEB_HOST:-0.0.0.0}" --port "${DSH_WEB_PORT:-3080}"
-fi
+dsh web &
+DSH_PID=$!
 
-exec "$@"
+exec socat "TCP-LISTEN:${DSH_WEB_PORT:-3080},bind=${DSH_WEB_HOST:-0.0.0.0},fork,reuseaddr" TCP:127.0.0.1:3080
