@@ -7,18 +7,31 @@ mkdir -p /workspace
 
 dsh web &
 
-AUTH_CONF=""
 if [ -n "$DSH_AUTH_USER" ] && [ -n "$DSH_AUTH_PASS" ]; then
     printf '%s:%s\n' "$DSH_AUTH_USER" "$(openssl passwd -apr1 "$DSH_AUTH_PASS")" > /etc/nginx/.htpasswd
-    AUTH_CONF='auth_basic "dsh"; auth_basic_user_file /etc/nginx/.htpasswd;'
 fi
 
 if [ ! -f /etc/nginx/nginx.conf ]; then
     HOST="${DSH_WEB_HOST:-0.0.0.0}"
     PORT="${DSH_WEB_PORT:-3081}"
-    AUTH_CONF=""
+    AUTH_REQUEST_CONF=""
+    AUTH_INTERNAL_LOCATIONS=""
     if [ -f /etc/nginx/.htpasswd ]; then
-        AUTH_CONF='auth_basic "dsh"; auth_basic_user_file /etc/nginx/.htpasswd;'
+        AUTH_REQUEST_CONF='auth_request /auth; error_page 401 = @auth_failed;'
+        AUTH_INTERNAL_LOCATIONS='location = /auth {
+            internal;
+            auth_basic "dsh";
+            auth_basic_user_file /etc/nginx/.htpasswd;
+        }
+        location @auth_failed {
+            set $challenge "";
+            if ($http_authorization = "") {
+                set $challenge "Basic realm=\"dsh\"";
+                return 401;
+            }
+            add_header WWW-Authenticate $challenge always;
+            return 444;
+        }'
     fi
 
     cat > /etc/nginx/nginx.conf <<NGINXEOF
@@ -31,8 +44,7 @@ http {
         listen ${HOST}:${PORT};
         server_name _;
         location / {
-            $AUTH_CONF
-            error_page 401 =403;
+            ${AUTH_REQUEST_CONF}
             proxy_pass http://127.0.0.1:3080;
             proxy_set_header Host 127.0.0.1:3081;
             proxy_set_header Origin "";
@@ -40,6 +52,7 @@ http {
             proxy_set_header Upgrade \$http_upgrade;
             proxy_set_header Connection "upgrade";
         }
+        ${AUTH_INTERNAL_LOCATIONS}
     }
 }
 NGINXEOF
