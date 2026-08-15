@@ -23,7 +23,7 @@ services:
     ports:
       - "3081:3081"
     volumes:
-      - ~/.dsh:/app/.dsh
+      - dshconf:/app/.dsh
       - ~/workspace:/workspace
     environment:
     # 配置访问地址与端口
@@ -36,6 +36,9 @@ services:
     # - DSH_HOME=/app/.dsh
     security_opt:
       - no-new-privileges:true
+
+volumes:
+  dshconf:
 ```
 
 启动后浏览器访问 `http://服务器IP:3081`。
