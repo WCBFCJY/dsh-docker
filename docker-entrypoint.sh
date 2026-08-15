@@ -15,7 +15,7 @@ fi
 
 if [ ! -f /etc/nginx/nginx.conf ]; then
     HOST="${DSH_WEB_HOST:-0.0.0.0}"
-    PORT="${DSH_WEB_PORT:-3080}"
+    PORT="${DSH_WEB_PORT:-3081}"
     AUTH_CONF=""
     if [ -f /etc/nginx/.htpasswd ]; then
         AUTH_CONF='auth_basic "dsh"; auth_basic_user_file /etc/nginx/.htpasswd;'
@@ -33,7 +33,7 @@ http {
         location / {
             $AUTH_CONF
             proxy_pass http://127.0.0.1:3080;
-            proxy_set_header Host 127.0.0.1:3080;
+            proxy_set_header Host 127.0.0.1:3081;
             proxy_set_header Origin "";
             proxy_http_version 1.1;
             proxy_set_header Upgrade \$http_upgrade;
