@@ -21,7 +21,7 @@ if [ ! -f /etc/nginx/nginx.conf ]; then
         WS_BLOCKS='location = /api/events.mux {
             auth_basic "dsh";
             auth_basic_user_file /etc/nginx/.htpasswd;
-            error_page 401 =403;
+            error_page 401 =444;
             proxy_pass http://127.0.0.1:3080;
             proxy_set_header Host 127.0.0.1:3081;
             proxy_set_header Origin "";
@@ -32,7 +32,7 @@ if [ ! -f /etc/nginx/nginx.conf ]; then
         location = /api/events.host {
             auth_basic "dsh";
             auth_basic_user_file /etc/nginx/.htpasswd;
-            error_page 401 =403;
+            error_page 401 =444;
             proxy_pass http://127.0.0.1:3080;
             proxy_set_header Host 127.0.0.1:3081;
             proxy_set_header Origin "";
