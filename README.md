@@ -70,7 +70,7 @@ volumes:
 
 - `/app/.dsh` — DSH 配置、profiles、会话状态
 - `/workspace` — 工作区,Agent 可操作的项目目录
-- 镜像 dsh 通过 `npm install -g @deepseek-ai/dsh` 安装,为构建时的 npm `latest` 版本;
+- 镜像 dsh 通过 `npm install -g @deepseek-ai/dsh@alpha` 安装,为构建时的 npm `alpha` 版本;
 
 ## License
 
