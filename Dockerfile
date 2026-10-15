@@ -18,7 +18,7 @@ RUN apt-get update \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -f /usr/lib/python3*/EXTERNALLY-MANAGED
 
-RUN npm install -g @deepseek-ai/dsh \
+RUN npm install -g @deepseek-ai/dsh pnpm \
     && npm cache clean --force
 
 RUN mkdir -p /app/.dsh /workspace
